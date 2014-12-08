@@ -1,4 +1,6 @@
 #!/bin/bash -x
+#From ylobankov
+#https://github.com/ylobankov/sahara_integration_tests/blob/master/sahara_integration_tests/helpers/check_hadoop_example_job.sh
 
 HADOOP_USER=""
 HADOOP_EXAMPLES_PATH=""
