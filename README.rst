@@ -114,7 +114,7 @@ This section is array-type.
 +---------------------+---------------------------------------------+
 | cluster_templates   | object, see section `cluster_templates`_    |
 +---------------------+---------------------------------------------+
-| cluster             | object, see section "`cluster`_"            |
+| cluster             | object, see `section "cluster"`_            |
 +---------------------+---------------------------------------------+
 | scaling             | object, see section `scaling`_              |
 +---------------------+---------------------------------------------+
