@@ -59,19 +59,18 @@ You can write all sections in one or several files.
 Section "credential"
 --------------------
 
-Required: os_username, os_password, os_tenant, os_auth_url.
 This section is dictionary-type.
 
 +-------------+--------+----------+------------------------------+-------------------------+
 |   Fields    |  Type  | Required |          Default             |          Value          |
 +=============+========+==========+==============================+=========================+
-| os_username | string |          | admin                        | user name for login     |
+| os_username | string | True     | admin                        | user name for login     |
 +-------------+--------+----------+------------------------------+-------------------------+
-| os_password | string |          | nova                         | password name for login |
+| os_password | string | True     | nova                         | password name for login |
 +-------------+--------+----------+------------------------------+-------------------------+
-| os_tenant   | string |          | admin                        | tenant name             |
+| os_tenant   | string | True     | admin                        | tenant name             |
 +-------------+--------+----------+------------------------------+-------------------------+
-| os_auth_url | string |          | `http://localhost:5000/v2.0` | url for login           |
+| os_auth_url | string | True     | `http://localhost:5000/v2.0` | url for login           |
 +-------------+--------+----------+------------------------------+-------------------------+
 | sahara_url  | string |          | None                         | url of sahara           |
 +-------------+--------+----------+------------------------------+-------------------------+
@@ -79,15 +78,15 @@ This section is dictionary-type.
 
 Section "network"
 -----------------
-Required: private_network, public_network.
+
 This section is dictionary-type.
 
 +-----------------------------+---------+----------+----------+-----------------------------+
 |           Fields            |   Type  | Required | Default  |           Value             |
 +=============================+=========+==========+==========+=============================+
-| private_network             | string  |          | private  | name of private network     |
+| private_network             | string  |  True    | private  | name of private network     |
 +-----------------------------+---------+----------+----------+-----------------------------+
-| public_network              | string  |          | public   | name of private network     |
+| public_network              | string  |  True    | public   | name of private network     |
 +-----------------------------+---------+----------+----------+-----------------------------+
 | type                        | string  |          | neutron  | "neutron" or "nova-network" |
 +-----------------------------+---------+----------+----------+-----------------------------+
@@ -98,17 +97,16 @@ This section is dictionary-type.
 Section "clusters"
 ------------------
 
-Required: plugin_name, plugin_version, image.
 This section is array-type.
 
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
 |        Fields       |   Type  | Required |              Default              |                  Value                |
 +=====================+=========+==========+===================================+=======================================+
-| plugin_name         | string  |          |                                   | name of plugin                        |
+| plugin_name         | string  | True     |                                   | name of plugin                        |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
-| plugin_version      | string  |          |                                   | version of plugin                     |
+| plugin_version      | string  | True     |                                   | version of plugin                     |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
-| image               | string  |          |                                   | name of image                         |
+| image               | string  | True     |                                   | name of image                         |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
 | node_group_templates| object  |          |                                   | see `section "node_group_templates"`_ |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
@@ -116,9 +114,9 @@ This section is array-type.
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
 | cluster             | object  |          |                                   | see `section "cluster"`_              |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
-| scaling             | object  |          | ['run_jobs', 'scale', 'run_jobs'] | see `section "scaling"`_              |
+| scaling             | object  |          |                                   | see `section "scaling"`_              |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
-| scenario            | array   |          |                                   | "run_jobs", "scale", "transient"      |
+| scenario            | array   |          | ['run_jobs', 'scale', 'run_jobs'] | "run_jobs", "scale", "transient"      |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
 | edp_jobs_flow       | string  |          |                                   | name of edp job flow                  |
 +---------------------+---------+----------+-----------------------------------+---------------------------------------+
@@ -129,25 +127,24 @@ This section is array-type.
 Section "node_group_templates"
 ------------------------------
 
-Required: plugin_name, flavor_id, node_processes.
 This section is array-type.
 
 +---------------------------+---------+----------+----------+---------------------------------------+
 |           Fields          |   Type  | Required | Default  |                  Value                |
 +===========================+=========+==========+==========+=======================================+
-| name                      | string  |          |          | name for node group template          |
+| name                      | string  | True     |          | name for node group template          |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| flavor_id                 | string  |          |          | id of flavor                          |
+| flavor_id                 | string  | True     |          | id of flavor                          |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| node_processes            | string  |          |          | name of process                       |
+| node_processes            | string  | True     |          | name of process                       |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| description               | string  |          |          | description for node group            |
+| description               | string  |          | Empty    | description for node group            |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| volumes_per_node          | integer |          |          | minimum 0                             |
+| volumes_per_node          | integer |          |    0     | minimum 0                             |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| volumes_size              | integer |          |          | minimum 0                             |
+| volumes_size              | integer |          |    0     | minimum 0                             |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| auto_security_group       | boolean |          |          |                                       |
+| auto_security_group       | boolean |          | True     |                                       |
 +---------------------------+---------+----------+----------+---------------------------------------+
 | security_group            | array   |          |          | security group                        |
 +---------------------------+---------+----------+----------+---------------------------------------+
@@ -159,43 +156,41 @@ This section is array-type.
 +---------------------------+---------+----------+----------+---------------------------------------+
 | volume_type               | string  |          |          |                                       |
 +---------------------------+---------+----------+----------+---------------------------------------+
-| is_proxy_gateway          | boolean |          |          |                                       |
+| is_proxy_gateway          | boolean |          | False    |                                       |
 +---------------------------+---------+----------+----------+---------------------------------------+
 
 
 Section "cluster_template"
 --------------------------
 
-Required: name, node_group_templates.
 This section is dictionary-type.
 
 +----------------------+---------+----------+-----------+---------------------------------------+
 |        Fields        |  Type   | Required |  Default  |                 Value                 |
 +======================+=========+==========+===========+=======================================+
-| name                 | string  |          |           | name for cluster template             |
+| name                 | string  | True     |           | name for cluster template             |
 +----------------------+---------+----------+-----------+---------------------------------------+
-| description          | string  |          |           | description                           |
+| description          | string  |          | Empty     | description                           |
 +----------------------+---------+----------+-----------+---------------------------------------+
 | cluster_configs      | object  |          |           | name_of_config_section: config: value |
 +----------------------+---------+----------+-----------+---------------------------------------+
-| node_group_templates | object  |          |           | name_of_node_group: count             |
+| node_group_templates | object  | True     |           | name_of_node_group: count             |
 +----------------------+---------+----------+-----------+---------------------------------------+
-| anti_affinity        | boolean |          |           |                                       |
+| anti_affinity        | boolean |          | False     |                                       |
 +----------------------+---------+----------+-----------+---------------------------------------+
 
 
 Section "cluster"
 -----------------
 
-Required: name.
 This section is dictionary-type.
 
 +--------------+---------+----------+---------+------------------+
 |    Fields    |  Type   | Required | Default |       Value      |
 +==============+=========+==========+=========+==================+
-| name         | string  |          |         | name for cluster |
+| name         | string  | True     | Empty   | name for cluster |
 +--------------+---------+----------+---------+------------------+
-| description  | string  |          |         |                  |
+| description  | string  |          | Empty   | description      |
 +--------------+---------+----------+---------+------------------+
 | is_transient | boolean |          | False   | value            |
 +--------------+---------+----------+---------+------------------+
@@ -204,17 +199,16 @@ This section is dictionary-type.
 Section "scaling"
 -----------------
 
-Required: operation, node_group, size
 This section is array-type.
 
 +------------+---------+----------+-----------+--------------------+
 |   Fields   |  Type   | Required |  Default  |       Value        |
 +============+=========+==========+===========+====================+
-| operation  | string  |          |           | "add" or "resize"  |
+| operation  | string  | True     |           | "add" or "resize"  |
 +------------+---------+----------+-----------+--------------------+
-| node_group | string  |          |           | name of node group |
+| node_group | string  | True     | Empty     | name of node group |
 +------------+---------+----------+-----------+--------------------+
-| size       | integer |          |           | count node group   |
+| size       | integer | True     | Empty     | count node group   |
 +------------+---------+----------+-----------+--------------------+
 
 
@@ -228,7 +222,7 @@ Required: type
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
 |       Fields      |  Type  | Required |  Default  |                                 Value                                |
 +===================+========+==========+===========+======================================================================+
-| type              | string |          |           | "Pig", "Java", "MapReduce", "MapReduce.Streaming", "Hive", "Spark"   |
+| type              | string | True     |           | "Pig", "Java", "MapReduce", "MapReduce.Streaming", "Hive", "Spark"   |
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
 | input_datasource  | object |          |           | see `section "input_datasource"`_                                    |
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
@@ -240,7 +234,7 @@ Required: type
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
 | configs           | dict   |          |           | config: value                                                        |
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
-| args              | array  |          |           | of args                                                              |
+| args              | array  |          |           | array of args                                                        |
 +-------------------+--------+----------+-----------+----------------------------------------------------------------------+
 
 
@@ -253,9 +247,9 @@ This section is dictionary-type.
 +--------+--------+----------+-----------+------------------+
 | Fields |  Type  | Required |  Default  |       Value      |
 +========+========+==========+===========+==================+
-| type   | string |          |           | "swift or "hdfs" |
+| type   | string | True     |           | "swift or "hdfs" |
 +--------+--------+----------+-----------+------------------+
-| source | string |          |           | uri              |
+| source | string | True     |           | uri of source    |
 +--------+--------+----------+-----------+------------------+
 
 
@@ -265,13 +259,13 @@ Section "output_datasource"
 Required: type, destination
 This section is dictionary-type.
 
-+--------+--------+----------+-----------+------------------+
-| Fields |  Type  | Required |  Default  |       Value      |
-+========+========+==========+===========+==================+
-| type   | string |          |           | "swift or "hdfs" |
-+--------+--------+----------+-----------+------------------+
-| source | string |          |           | uri              |
-+--------+--------+----------+-----------+------------------+
++-------------+--------+----------+-----------+------------------+
+| Fields      |  Type  | Required |  Default  |       Value      |
++=============+========+==========+===========+==================+
+| type        | string | True     |           | "swift or "hdfs" |
++-------------+--------+----------+-----------+------------------+
+| destination | string | True     |           | uri of source    |
++-------------+--------+----------+-----------+------------------+
 
 
 Section "main_lib"
@@ -283,9 +277,9 @@ This section is dictionary-type.
 +--------+--------+----------+-----------+----------------------+
 | Fields |  Type  | Required |  Default  |         Value        |
 +========+========+==========+===========+======================+
-| type   | string |          |           | "swift or "database" |
+| type   | string | True     |           | "swift or "database" |
 +--------+--------+----------+-----------+----------------------+
-| source | string |          |           | uri                  |
+| source | string | True     |           | uri of source        |
 +--------+--------+----------+-----------+----------------------+
 
 
@@ -298,7 +292,7 @@ This section is array-type.
 +--------+--------+----------+-----------+----------------------+
 | Fields |  Type  | Required |  Default  |         Value        |
 +========+========+==========+===========+======================+
-| type   | string |          |           | "swift or "database" |
+| type   | string | True     |           | "swift or "database" |
 +--------+--------+----------+-----------+----------------------+
-| source | string |          |           | uri                  |
+| source | string | True     |           | uri of source        |
 +--------+--------+----------+-----------+----------------------+
