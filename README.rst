@@ -62,19 +62,19 @@ Section "credential"
 Required: os_username, os_password, os_tenant, os_auth_url.
 This section is dictionary-type.
 
-+-------------+---------------------------------+
-|   Fields    |             Value               |
-+=============+=================================+
-| os_username | string, user name for login     |
-+-------------+---------------------------------+
-| os_password | string, password name for login |
-+-------------+---------------------------------+
-| os_tenant   | string, tenant name             |
-+-------------+---------------------------------+
-| os_auth_url | string, url for login           |
-+-------------+---------------------------------+
-| sahara_url  | string, url of sahara           |
-+-------------+---------------------------------+
++-------------+--------+-----------+------------------------+
+|   Fields    |  Type  | Required  |        Value           |
++=============+========+===========+========================+
+| os_username | string |     *     | user name for login    |
++-------------+--------+-----------+------------------------+
+| os_password | string |           | password name for login|
++-------------+--------+-----------+------------------------+
+| os_tenant   | string |           | tenant name            |
++-------------+--------+-----------+------------------------+
+| os_auth_url | string |           | url for login          |
++-------------+--------+-----------+------------------------+
+| sahara_url  | string |           | url of sahara          |
++-------------+--------+-----------+------------------------+
 
 
 Section "network"
@@ -110,13 +110,13 @@ This section is array-type.
 +---------------------+---------------------------------------------+
 | image               | string, name of image                       |
 +---------------------+---------------------------------------------+
-| node_group_templates| object, see section `node_group_templates`_ |
+| node_group_templates| object, see `section node_group_templates`_ |
 +---------------------+---------------------------------------------+
-| cluster_templates   | object, see section `cluster_templates`_    |
+| cluster_templates   | object, see `section cluster_templates`_    |
 +---------------------+---------------------------------------------+
 | cluster             | object, see `section "cluster"`_            |
 +---------------------+---------------------------------------------+
-| scaling             | object, see section `scaling`_              |
+| scaling             | object, see `section scaling`_              |
 +---------------------+---------------------------------------------+
 | scenario            | array, consists only of the values          |
 |                     |                         "run_jobs", "scale" |
@@ -187,8 +187,8 @@ This section is dictionary-type.
 +----------------------+-----------------------------------+
 
 
-Section "_`cluster`"
---------------------
+Section "cluster"
+-----------------
 
 Required: name.
 This section is dictionary-type.
@@ -224,7 +224,7 @@ This section is array-type.
 Section "edp_jobs_flow"
 -----------------------
 
-This section has object with name from section `clusters`_ field "edp_jobs_flow"
+This section has object with name from `section clusters`_ field "edp_jobs_flow"
 Object has sections of array-type.
 Required: type
 
@@ -234,13 +234,13 @@ Required: type
 | type              | string; "Pig", "Java", "MapReduce",       |
 |                   |    "MapReduce.Streaming", "Hive", "Spark" |
 +-------------------+-------------------------------------------+
-| input_datasource  | object, see section ``input_datasource``  |
+| input_datasource  | object, see `section input_datasource`_   |
 +-------------------+-------------------------------------------+
-| output_datasource | object, see section ``output_datasource`` |
+| output_datasource | object, see `section output_datasource`_  |
 +-------------------+-------------------------------------------+
-| main_lib          | object, see section ``main_lib``          |
+| main_lib          | object, see `section main_lib`_           |
 +-------------------+-------------------------------------------+
-| additional_libs   | object, see section ``additional_libs``   |
+| additional_libs   | object, see section `additional_libs`_    |
 +-------------------+-------------------------------------------+
 | configs           | dict, config: value                       |
 +-------------------+-------------------------------------------+
