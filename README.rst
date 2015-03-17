@@ -110,13 +110,13 @@ This section is array-type.
 +---------------------+---------------------------------------------+
 | image               | string, name of image                       |
 +---------------------+---------------------------------------------+
-| node_group_templates| object, see section ``node_group_templates``|
+| node_group_templates| object, see section `node_group_templates`_ |
 +---------------------+---------------------------------------------+
-| cluster_templates   | object, see section ``cluster_templates``   |
+| cluster_templates   | object, see section `cluster_templates`_    |
 +---------------------+---------------------------------------------+
-| cluster             | object, see section ``cluster``             |
+| cluster             | object, see section `cluster`_              |
 +---------------------+---------------------------------------------+
-| scaling             | object, see section ``scaling``             |
+| scaling             | object, see section `scaling`_              |
 +---------------------+---------------------------------------------+
 | scenario            | array, consists only of the values          |
 |                     |                         "run_jobs", "scale" |
@@ -187,8 +187,8 @@ This section is dictionary-type.
 +----------------------+-----------------------------------+
 
 
-Section "cluster"
------------------
+Section "_`cluster`"
+--------------------
 
 Required: name.
 This section is dictionary-type.
@@ -224,7 +224,7 @@ This section is array-type.
 Section "edp_jobs_flow"
 -----------------------
 
-This section has object with name from section ``clusters`` field "edp_jobs_flow"
+This section has object with name from section `clusters`_ field "edp_jobs_flow"
 Object has sections of array-type.
 Required: type
 
