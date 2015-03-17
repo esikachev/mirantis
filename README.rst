@@ -55,6 +55,13 @@ _`How to write scenario files`
 
 You can write all sections in one or several files.
 
+Field "concurrency"
+-------------------
+
+This field has integer value, and set concurrency for run tests
+
+For example:
+     ``concurrency: 2``
 
 Section "credential"
 --------------------
